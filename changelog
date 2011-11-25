@@ -1,0 +1,23 @@
+redeclipse (1.1-1~getdeb1) lucid; urgency=low
+
+  * New upstream version
+
+ -- Christoph Korn <christoph.korn@getdeb.net>  Mon, 25 Jul 2011 12:07:22 +0200
+
+redeclipse (1.0-1~getdeb1) lucid; urgency=low
+
+  * Upload to PlayDeb (LP: #735623)
+
+ -- Christoph Korn <christoph.korn@getdeb.net>  Wed, 16 Mar 2011 18:54:28 +0100
+
+redeclipse (0.90+svn1748-ppa1) maverick; urgency=low
+
+  * Changelog for ubuntu ppa 
+
+ -- Arand Nash <ienorand@gmail.com>  Tue, 22 Feb 2011 17:43:55 +0000
+
+redeclipse (0.90+svn1748-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Arand Nash <ienorand@gmail.com>  Tue, 22 Feb 2011 17:43:42 +0000

@@ -1,0 +1,28 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+%:
+	dh $@ --sourcedirectory=src
+
+override_dh_auto_build:
+	convert -shave 4x4 -resize 32x32 src/site/bits/favicon.png debian/redeclipse.png	
+	dh_auto_build
+
+override_dh_install:
+	# Fonts into own package
+	mv data/fonts/akashi.ttf .
+	dh_install
+	mv akashi.ttf data/fonts/
+
+	rm -f debian/redeclipse-data/usr/share/games/redeclipse/data/crosshairs/license.txt
+	rm -f debian/redeclipse-data/usr/share/games/redeclipse/data/models/actors/turret/license.txt
+	[ ! -d debian/redeclipse-data/usr/share/games/redeclipse/data/crosshairs/templates/ ] || \
+	  find debian/redeclipse-data/usr/share/games/redeclipse/data/crosshairs/templates/ -type d -empty -delete
