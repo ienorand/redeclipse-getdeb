@@ -21,6 +21,8 @@ override_dh_auto_install:
 	install -d debian/tmp/usr/share/pixmaps
 	convert 'src/redeclipse.ico[1]' \
 		debian/tmp/usr/share/pixmaps/redeclipse.xpm
+	find debian/tmp/usr/share/games/redeclipse/data \
+		-name license.txt -delete
 
 overrride_dh_builddeb:
 	dh_builddeb -- -Zxz
