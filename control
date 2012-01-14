@@ -1,5 +1,5 @@
 Source: redeclipse
-Section: contrib/games
+Section: non-free/games
 Priority: optional
 Uploaders: Martin Erik Werner <martinerikwerner@gmail.com>
 Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
@@ -47,3 +47,11 @@ Depends: redeclipse-server (= ${binary:Version}), ${misc:Depends}
 Description: debug symbols for the Red Eclipse dedicated server
  This package contains the debugging symbols for the dedicated server of the
  Red Eclipse FPS game.
+
+Package: redeclipse-data
+Architecture: all
+Depends: ${misc:Depends}
+Enhances: redeclipse-server
+Description: data for the Red Eclipse FPS game
+ This package contains the data content, e.g. maps, models, textures, sounds,
+ etc. for the Red Eclipse FPS game.

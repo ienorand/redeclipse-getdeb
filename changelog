@@ -1,4 +1,4 @@
-redeclipse (1.2-1) unstable; urgency=low
+redeclipse-data (1.2-1) unstable; urgency=low
 
   * Initial release (Closes: #626161)
   * debian/patches/:

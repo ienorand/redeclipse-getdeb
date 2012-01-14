@@ -17,8 +17,7 @@ override_dh_strip:
 
 override_dh_auto_install:
 	dh_auto_install -- prefix=/usr games=/games gamesbin=/games \
-		system-install-client system-install-server \
-		system-install-docs system-install-menus
+		system-install
 	install -d debian/tmp/usr/share/pixmaps
 	convert 'src/redeclipse.ico[1]' \
 		debian/tmp/usr/share/pixmaps/redeclipse.xpm
@@ -40,6 +39,14 @@ get-orig-source:
 	rm -rf $(DIR)/src/lib/
 	rm -rf $(DIR)/src/install/win/
 	rm -rf $(DIR)/bin/
+	# CGTextures license is questionable,
+	# these textures are currently not in use anyways
+	rm -f $(DIR)/data/trak/trak4/kitchen*
+	cd $(DIR)/data/trak/trak4 && \
+		ln -s plaster3.jpg kitchen.jpg; \
+		ln -s plaster3.jpg kitchen1.jpg; \
+		ln -s plaster3_nm.png kitchen_nm.png; \
+		ln -s plaster3_s.jpg kitchen_s.jpg
 	BZIP2="-9" tar -cj --owner root --group root --mode a+rX \
 		-f $(TAR) $(DIR)
 	rm -rf $(DIR)
