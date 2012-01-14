@@ -24,7 +24,7 @@ Description: single-player and multi-player first-person ego-shooter
  gameplay, with a general theme of agility in a variety of environments.
 
 Package: redeclipse-dbg
-Section: contrib/debug
+Section: non-free/debug
 Priority: extra
 Architecture: any
 Depends: redeclipse (= ${binary:Version}), ${misc:Depends}
@@ -40,7 +40,7 @@ Description: server for the Red Eclipse FPS game
  init integration.
 
 Package: redeclipse-server-dbg
-Section: contrib/debug
+Section: non-free/debug
 Priority: extra
 Architecture: any
 Depends: redeclipse-server (= ${binary:Version}), ${misc:Depends}
