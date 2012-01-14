@@ -1,8 +1,8 @@
 Source: redeclipse
 Section: non-free/games
 Priority: optional
-Uploaders: Martin Erik Werner <martinerikwerner@gmail.com>
-Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
+Maintainer: GetDeb Package Ninjas <package.ninjas@getdeb.net>
+XSBC-Original-Maintainer: Debian Games Team <pkg-games-devel@lists.alioth.debian.org>
 Build-Depends:
  debhelper (>= 8),
  imagemagick,
