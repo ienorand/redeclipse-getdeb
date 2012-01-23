@@ -1,3 +1,9 @@
+redeclipse (1.2-1~getdeb1) UNRELEASED; urgency=low
+
+  * New upstream version
+
+ -- Martin Erik Werner <martinerikwerner@gmail.com>  Sat, 14 Jan 2012 16:50:41 +0100
+
 redeclipse (1.1-1~getdeb1) lucid; urgency=low
 
   * New upstream version

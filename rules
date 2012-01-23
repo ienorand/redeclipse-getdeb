@@ -1,28 +1,54 @@
 #!/usr/bin/make -f
-# -*- makefile -*-
-# Sample debian/rules that uses debhelper.
-# This file was originally written by Joey Hess and Craig Small.
-# As a special exception, when this file is copied by dh-make into a
-# dh-make output file, you may use that output file without restriction.
-# This special exception was added by Craig Small in version 0.37 of dh-make.
-
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
 
 %:
 	dh $@ --sourcedirectory=src
 
+override_dh_auto_clean:
+	dh_auto_clean
+	dh_auto_clean --sourcedirectory=src/enet
+
 override_dh_auto_build:
-	convert -shave 4x4 -resize 32x32 src/site/bits/favicon.png debian/redeclipse.png	
-	dh_auto_build
+	dh_auto_build -- client server icons
 
-override_dh_install:
-	# Fonts into own package
-	mv data/fonts/akashi.ttf .
-	dh_install
-	mv akashi.ttf data/fonts/
+override_dh_strip:
+	dh_strip -predeclipse --dbg-package=redeclipse-dbg
+	dh_strip -predeclipse-server --dbg-package=redeclipse-server-dbg
+	dh_strip
 
-	rm -f debian/redeclipse-data/usr/share/games/redeclipse/data/crosshairs/license.txt
-	rm -f debian/redeclipse-data/usr/share/games/redeclipse/data/models/actors/turret/license.txt
-	[ ! -d debian/redeclipse-data/usr/share/games/redeclipse/data/crosshairs/templates/ ] || \
-	  find debian/redeclipse-data/usr/share/games/redeclipse/data/crosshairs/templates/ -type d -empty -delete
+override_dh_auto_install:
+	dh_auto_install -- prefix=/usr games=/games gamesbin=/games \
+		system-install
+	install -d debian/tmp/usr/share/pixmaps
+	convert 'src/redeclipse.ico[1]' \
+		debian/tmp/usr/share/pixmaps/redeclipse.xpm
+	find debian/tmp/usr/share/games/redeclipse/data \
+		-name license.txt -delete
+
+override_dh_builddeb:
+	dh_builddeb -- -Zxz
+
+VER=$(shell dpkg-parsechangelog | sed -rne 's/^Version: ([^-]+).*/\1/p')
+DIR=redeclipse-$(VER).orig
+TAR=redeclipse_$(VER).orig.tar.bz2
+get-orig-source:
+	uscan --noconf --force-download --download-current-version --destdir=.
+	rm -rf $(DIR)
+	tar -xf $(TAR)
+	rm -f $(TAR)
+	mv redeclipse/ $(DIR)
+	rm -rf $(DIR)/src/include/
+	rm -rf $(DIR)/src/xcode/
+	rm -rf $(DIR)/src/lib/
+	rm -rf $(DIR)/src/install/win/
+	rm -rf $(DIR)/bin/
+	# CGTextures license is questionable,
+	# these textures are currently not in use anyways
+	rm -f $(DIR)/data/trak/trak4/kitchen*
+	cd $(DIR)/data/trak/trak4 && \
+		ln -s plaster3.jpg kitchen.jpg; \
+		ln -s plaster3.jpg kitchen1.jpg; \
+		ln -s plaster3_nm.png kitchen_nm.png; \
+		ln -s plaster3_s.jpg kitchen_s.jpg
+	BZIP2="-9" tar -cj --owner root --group root --mode a+rX \
+		-f $(TAR) $(DIR)
+	rm -rf $(DIR)
