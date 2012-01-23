@@ -24,9 +24,6 @@ override_dh_auto_install:
 	find debian/tmp/usr/share/games/redeclipse/data \
 		-name license.txt -delete
 
-override_dh_builddeb:
-	dh_builddeb -- -Zxz
-
 VER=$(shell dpkg-parsechangelog | sed -rne 's/^Version: ([^-]+).*/\1/p')
 DIR=redeclipse-$(VER).orig
 TAR=redeclipse_$(VER).orig.tar.bz2
